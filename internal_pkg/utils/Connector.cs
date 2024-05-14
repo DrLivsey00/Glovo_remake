@@ -9,7 +9,7 @@ namespace Glovo.internal_pkg.utils
 {
     public class Database
     {
-        SQLiteConnection connection;
+        internal SQLiteConnection connection;
 
         public Database() {
             connection = new SQLiteConnection(@"Data Source = C:\study\Glovo\internal_pkg\db\database.db; Version = 3");
@@ -19,6 +19,7 @@ namespace Glovo.internal_pkg.utils
         {
             connection.Open();
             MessageBox.Show("Connected!");
+            
         }
     }
 }

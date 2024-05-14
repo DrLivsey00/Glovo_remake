@@ -13,6 +13,7 @@ namespace Glovo
             InitializeComponent();
             this.session = session;
             Database.Connect();
+
         }
 
         private void button1_Click(object sender, EventArgs e)
