@@ -3,34 +3,22 @@ using Newtonsoft.Json;
 using System.Xml.Serialization;
 using System.Numerics;
 using System.Data.SQLite;
+using Newtonsoft.Json.Bson;
 
 namespace Glovo.internal_pkg.utils
 {
-    public class Connection
+    public class Database
     {
-        public string filePath;
+        SQLiteConnection connection;
 
-        public Connection(string filePath)
-        {
-            if (filePath == null || filePath.Length == 0)
-            {
-                throw new ArgumentException("Wrong file path!");
-            }
-            this.filePath = filePath;
+        public Database() {
+            connection = new SQLiteConnection(@"Data Source = C:\study\Glovo\internal_pkg\db\database.db; Version = 3");
         }
 
-        public List<Order> GetOrders()
+        public void  Connect()
         {
-            string data = File.ReadAllText(filePath);
-            List<Order> orders = JsonConvert.DeserializeObject<List<Order>>(data);
-            return orders;
+            connection.Open();
+            MessageBox.Show("Connected!");
         }
-        public List<Dish> GetDishes()
-        {
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(Dishes));
-            
-            
-        }
-
     }
 }
