@@ -1,5 +1,8 @@
 ﻿using Glovo.internal_pkg.models;
 using Newtonsoft.Json;
+using System.Xml.Serialization;
+using System.Numerics;
+using System.Data.SQLite;
 
 namespace Glovo.internal_pkg.utils
 {
@@ -22,7 +25,12 @@ namespace Glovo.internal_pkg.utils
             List<Order> orders = JsonConvert.DeserializeObject<List<Order>>(data);
             return orders;
         }
-
+        public List<Dish> GetDishes()
+        {
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(Dishes));
+            
+            
+        }
 
     }
 }
