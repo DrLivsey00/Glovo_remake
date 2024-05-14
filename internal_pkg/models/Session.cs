@@ -1,5 +1,4 @@
-﻿
-namespace Glovo.internal_pkg.models
+﻿namespace Glovo.internal_pkg.models
 {
     public class Session
     {

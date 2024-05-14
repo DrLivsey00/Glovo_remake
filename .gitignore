@@ -4,3 +4,6 @@ Glovo.csproj
 Glovo.csproj.user
 Glovo.sln
 .vs
+Dishes.json
+Orders.json
+Users.json
