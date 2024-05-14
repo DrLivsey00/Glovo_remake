@@ -2,14 +2,14 @@
 {
     public class Session
     {
-        uint userId;
-        List<uint> Cart;
-        Permission Permission;
+        internal uint userId;
+        internal List<(Dish,int)> Cart;
+        internal Permission Permission;
 
         public Session()
         {
             userId = 0;
-            Cart= new List<uint>();
+            Cart= new List<(Dish, int)>();
             Permission = Permission.USER;
         }
 

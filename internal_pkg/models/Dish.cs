@@ -17,6 +17,13 @@ namespace Glovo.internal_pkg.models
             this.dishPrice = dishPrice;
            
         }
+        public Dish(int id,string dishName, double dishPrice)
+        {
+            this.id = id;
+            this.dishName = dishName;
+            this.dishPrice = dishPrice;
+
+        }
 
         public void AddDishToDb()
         {

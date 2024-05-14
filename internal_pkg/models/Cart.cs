@@ -8,5 +8,6 @@ namespace Glovo.internal_pkg.models
 {
     internal class Cart
     {
+        
     }
 }
