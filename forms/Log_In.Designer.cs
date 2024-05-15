@@ -77,6 +77,7 @@
             log_up.Size = new Size(146, 15);
             log_up.TabIndex = 4;
             log_up.Text = "Not registered yet? Log up";
+            log_up.Click += log_up_Click;
             // 
             // button1
             // 
@@ -86,6 +87,7 @@
             button1.TabIndex = 5;
             button1.Text = "Submit";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // Log_In
             // 
@@ -101,6 +103,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Log_In";
             Text = "Log_In";
+            FormClosed += Log_In_FormClosed;
             ResumeLayout(false);
             PerformLayout();
         }

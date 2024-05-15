@@ -60,17 +60,14 @@ namespace Glovo.internal_pkg.utils
             cmd.Parameters.AddWithValue("@userId", userID);
             cmd.Parameters.AddWithValue("@price", order_price);
             cmd.ExecuteNonQuery();
-            cmd.CommandText = @"SELECT MAX(order_id) FROM orders)";
+            cmd.CommandText = @"SELECT MAX(order_id) FROM orders";
             using (SQLiteDataReader reader = cmd.ExecuteReader())
             {
                 if (reader.Read())
                 {
-                    if (!reader.IsDBNull(0))
-                    {
-                        orderId = reader.GetInt32(0);
-                    }
+                  orderId = reader.GetInt32(0);
                 }
-                orderId = 1;
+                
             }
 
             foreach ((Dish dish, int quantity) in orderItems)

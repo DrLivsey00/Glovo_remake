@@ -72,8 +72,8 @@ namespace Glovo
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Add_dish_test add_Dish_Test = new Add_dish_test();
-            add_Dish_Test.Show();
+            Log_In log_In = new Log_In(session);
+            log_In.Show();
         }
     }
 }
