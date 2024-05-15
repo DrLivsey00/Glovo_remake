@@ -46,5 +46,41 @@ namespace Glovo.internal_pkg.utils
             return Menulist;
 
         }
+
+        public void ProceedOrder(List<(Dish,int)> orderItems, int userID,double order_price)
+        {
+            int orderId = 0;
+            if (orderItems == null || orderItems.Count == 0)
+            {
+                throw new ArgumentNullException("Cart can`t be empty or null...");
+            }
+            SQLiteCommand cmd = new SQLiteCommand();
+            cmd.Connection = connection;
+            cmd.CommandText = @"INSERT INTO orders (user_id,order_price) VALUES (@userId,@price)";
+            cmd.Parameters.AddWithValue("@userId", userID);
+            cmd.Parameters.AddWithValue("@price", order_price);
+            cmd.ExecuteNonQuery();
+            cmd.CommandText = @"SELECT MAX(order_id) FROM orders)";
+            using (SQLiteDataReader reader = cmd.ExecuteReader())
+            {
+                if (reader.Read())
+                {
+                    if (!reader.IsDBNull(0))
+                    {
+                        orderId = reader.GetInt32(0);
+                    }
+                }
+                orderId = 1;
+            }
+
+            foreach ((Dish dish, int quantity) in orderItems)
+            {
+                cmd.CommandText = @"INSERT INTO order_details (order_id,dish_id,quantity) VALUES (@orderId,@dishId,@quantity)";
+                cmd.Parameters.AddWithValue("@orderId", orderId);
+                cmd.Parameters.AddWithValue("@dishId", dish.id);
+                cmd.Parameters.AddWithValue("@quantity", quantity);
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }

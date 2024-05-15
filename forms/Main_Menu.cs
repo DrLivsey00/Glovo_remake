@@ -36,11 +36,12 @@ namespace Glovo
                 priceLabel.Left = 150;
                 this.Controls.Add(priceLabel);
 
+                int index = i;
                 Button addButton = new Button();
                 addButton.Text = "Додати";
                 addButton.Top = topMargin + (i * 30);
                 addButton.Left = 250;
-                addButton.Click += (sender, e) => AddToCart(Menu[i]);
+                addButton.Click += (sender, e) => AddToCart(Menu[index]);
                 this.Controls.Add(addButton);
             }
         }
@@ -66,6 +67,7 @@ namespace Glovo
                 // Добавить блюдо в корзину с количеством 1
                 cart.Add((dish, 1));
             }
+            session.Cart = cart;
         }
         private void button1_Click(object sender, EventArgs e)
         {
