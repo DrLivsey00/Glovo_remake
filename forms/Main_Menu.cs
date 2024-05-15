@@ -2,6 +2,7 @@ using Glovo.forms;
 using Glovo.internal_pkg.models;
 using Glovo.internal_pkg.utils;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+using Cart = Glovo.forms.Cart;
 
 namespace Glovo
 {
@@ -53,7 +54,7 @@ namespace Glovo
                 MessageBox.Show("Please log in");
                 return;
             }
-            List<(Dish,int)> cart = session.Cart;
+            List<(Dish, int)> cart = session.Cart;
             var existingItem = cart.FirstOrDefault(item => item.Item1.dishName == dish.dishName);
 
             if (existingItem != default) // Если блюдо уже присутствует в корзине
@@ -74,6 +75,13 @@ namespace Glovo
             this.Hide();
             Log_In log_In = new Log_In(session);
             log_In.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Cart cart = new Cart(session);
+            cart.Show();
         }
     }
 }

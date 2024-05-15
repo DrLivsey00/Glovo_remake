@@ -2,7 +2,7 @@
 {
     public class Session
     {
-        internal uint userId;
+        internal int userId;
         internal List<(Dish,int)> Cart;
         internal Permission Permission;
 

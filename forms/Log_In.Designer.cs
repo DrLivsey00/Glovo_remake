@@ -34,6 +34,7 @@
             textBox1 = new TextBox();
             log_up = new Label();
             button1 = new Button();
+            label3 = new Label();
             SuspendLayout();
             // 
             // label1
@@ -81,7 +82,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(211, 158);
+            button1.Location = new Point(211, 171);
             button1.Name = "button1";
             button1.Size = new Size(100, 24);
             button1.TabIndex = 5;
@@ -89,11 +90,22 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.ForeColor = SystemColors.MenuHighlight;
+            label3.Location = new Point(235, 153);
+            label3.Name = "label3";
+            label3.Size = new Size(43, 15);
+            label3.TabIndex = 6;
+            label3.Text = "Admin";
+            // 
             // Log_In
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(513, 243);
+            Controls.Add(label3);
             Controls.Add(button1);
             Controls.Add(log_up);
             Controls.Add(textBox1);
@@ -116,5 +128,6 @@
         private TextBox textBox1;
         private Label log_up;
         private Button button1;
+        private Label label3;
     }
 }

@@ -17,6 +17,7 @@ namespace Glovo.forms
     public partial class Log_up : Form
     {
         Database db = new Database();
+        Session session = new Session();
         public Log_up()
         {
             InitializeComponent();
@@ -33,13 +34,13 @@ namespace Glovo.forms
                 User user = new User();
                 string password = textBox1.Text;
                 string email = email_input.Text;
-                if(!IsValidEmail(email))
+                if (!IsValidEmail(email))
                 {
                     email_input.Text = "Invalid email";
-                    email_input.ForeColor= Color.Red;
+                    email_input.ForeColor = Color.Red;
                     return;
                 }
-                if(!DontDublicate(email))
+                if (!DontDublicate(email))
                 {
                     MessageBox.Show("User already registered");
                     return;
@@ -54,8 +55,10 @@ namespace Glovo.forms
                 user.password = password;
                 user.AddToDb();
                 MessageBox.Show("Succes!!!");
+
                 email_input.Clear();
                 textBox1.Clear();
+                session.userId = user.Id;
 
             }
             catch (Exception ex)
@@ -92,6 +95,12 @@ namespace Glovo.forms
                     return true;
                 }
             }
+        }
+
+        private void Log_up_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Main_Menu m = new Main_Menu(session);
+            m.Show();
         }
     }
 }

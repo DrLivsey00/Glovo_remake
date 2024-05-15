@@ -41,7 +41,7 @@ namespace Glovo.forms
                     this.Controls.Add(nameLabel);
 
                     Label priceLabel = new Label();
-                    priceLabel.Text = cart[i].Item1.ToString(); // Вывод цены в формате денежной единицы
+                    priceLabel.Text = cart[i].Item2.ToString(); // Вывод цены в формате денежной единицы
                     priceLabel.Top = topMargin + (i * 30);
                     priceLabel.Left = 150;
                     this.Controls.Add(priceLabel);
@@ -70,7 +70,7 @@ namespace Glovo.forms
             try
             {
                 db.Connect();
-                db.ProceedOrder(current.Cart,(int)current.userId,oprice);
+                db.ProceedOrder(current.Cart,current.userId,oprice);
             }
             catch (Exception ex)
             {

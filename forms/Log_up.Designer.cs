@@ -90,6 +90,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Log_up";
             Text = "Log_up";
+            FormClosed += Log_up_FormClosed;
             ResumeLayout(false);
             PerformLayout();
         }

@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Glovo.internal_pkg.models
 {
-    internal class User
+    public class User
     {
         public int Id;
         public string email;
-        public string password { private get;  set; }
-        private Permission permission;
+        public string password;
+        public Permission permission;
         Database db = new Database();
 
         public User() { 
@@ -45,7 +45,6 @@ namespace Glovo.internal_pkg.models
                 {
                      Id = reader.GetInt32(0);
                 }
-                Id = 1;
             }
             if (i < 1)
             {

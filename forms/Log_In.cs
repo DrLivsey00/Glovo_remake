@@ -1,4 +1,5 @@
 ﻿using Glovo.internal_pkg.models;
+using Glovo.internal_pkg.utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,7 @@ namespace Glovo.forms
     public partial class Log_In : Form
     {
         Session session;
+        Database db = new Database();
         public Log_In(Session session)
         {
             InitializeComponent();
@@ -37,12 +39,21 @@ namespace Glovo.forms
         {
             try
             {
-                User user = new User();
+                if (db.connection.State != ConnectionState.Open)
+                {
+                    db.Connect();
+                }
+                string email = email_input.Text;
+                string password = textBox1.Text;
+                User user = db.GetUser(email, password);
+                session.userId = user.Id;
+                this.Close();
 
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                return;
             }
         }
     }

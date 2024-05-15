@@ -79,5 +79,44 @@ namespace Glovo.internal_pkg.utils
                 cmd.ExecuteNonQuery();
             }
         }
+
+        public User GetUser(string email, string password)
+        {
+            User user = new User();
+
+            SQLiteCommand cmd = new SQLiteCommand();
+            cmd.Connection = connection;
+            cmd.CommandText = @"SELECT * FROM users WHERE user_email = @email";
+            cmd.Parameters.AddWithValue("@email", email);
+
+            using (SQLiteDataReader reader = cmd.ExecuteReader())
+            {
+                if (reader.Read())
+                {
+                    user.Id = reader.GetInt32(0);
+                    user.email = reader.GetString(1);
+                    user.password = reader.GetString(2);
+                    string permission = reader.GetString(3);
+                    if (permission == "ADMIN")
+                    {
+                        user.permission = Permission.ADMIN;
+                    }
+                    else
+                    {
+                        user.permission = Permission.USER;
+                    }
+                    if (password!=user.password)
+                    {
+                        throw new Exception("Wrong password");
+                    }
+                }
+                else
+                {
+                    throw new Exception("Invalid email!");
+                }
+            }
+            return user;
+
+        }
     }
 }

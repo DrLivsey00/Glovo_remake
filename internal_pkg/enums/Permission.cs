@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Glovo.internal_pkg.models
 {
-    enum  Permission
+    public enum  Permission
     {
         USER,
         ADMIN,
