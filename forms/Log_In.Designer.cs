@@ -99,6 +99,7 @@
             label3.Size = new Size(43, 15);
             label3.TabIndex = 6;
             label3.Text = "Admin";
+            label3.Click += label3_Click;
             // 
             // Log_In
             // 

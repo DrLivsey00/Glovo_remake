@@ -25,5 +25,11 @@ namespace Glovo.forms
             Dish dishToAdd = new Dish(Name, Price);
             dishToAdd.AddDishToDb();
         }
+
+        private void Add_dish_test_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Main_Menu add = new Main_Menu(new Session());
+            add.Show();
+        }
     }
 }

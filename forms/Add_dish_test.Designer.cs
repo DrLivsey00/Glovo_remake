@@ -76,6 +76,7 @@
             Controls.Add(textBox1);
             Name = "Add_dish_test";
             Text = "Add_dish_test";
+            FormClosed += Add_dish_test_FormClosed;
             ResumeLayout(false);
             PerformLayout();
         }

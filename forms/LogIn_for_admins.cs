@@ -9,33 +9,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Glovo.forms
 {
-    public partial class Log_In : Form
+
+    public partial class LogIn_for_admins : Form
     {
-        Session session;
-        Database db = new Database();
-        public Log_In(Session session)
+        public LogIn_for_admins()
         {
             InitializeComponent();
-            this.session = session;
         }
+        Database db = new Database();
 
-        private void log_up_Click(object sender, EventArgs e)
+        
+
+        private void LogIn_for_admins_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Log_up log_Up = new Log_up();
-            this.Hide();
-            log_Up.Show();
+            Main_Menu add = new Main_Menu(new Session());
+            add.Show();
         }
 
-        private void Log_In_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Main_Menu main_Menu = new Main_Menu(session);
-            main_Menu.Show();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -46,8 +41,14 @@ namespace Glovo.forms
                 string email = email_input.Text;
                 string password = textBox1.Text;
                 User user = db.GetUser(email, password);
-                session.userId = user.Id;
-                this.Close();
+                if (user.permission.ToString() != "ADMIN")
+                {
+                    MessageBox.Show("Acces denied!");
+                    return;
+                }
+                this.Hide();
+                Add_dish_test add = new Add_dish_test();
+                add.Show();
 
             }
             catch (Exception ex)
@@ -56,12 +57,6 @@ namespace Glovo.forms
                 return;
             }
         }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            LogIn_for_admins ad = new LogIn_for_admins();
-            ad.Show();
-        }
     }
+
 }
