@@ -71,6 +71,11 @@ namespace Glovo.forms
             {
                 db.Connect();
                 db.ProceedOrder(current.Cart,current.userId,oprice);
+                current.Cart = new List<(Dish, int)>();
+                Main_Menu main_Menu = new Main_Menu(current);
+                this.Hide();
+                main_Menu.Show();
+
             }
             catch (Exception ex)
             {

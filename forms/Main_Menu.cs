@@ -68,6 +68,7 @@ namespace Glovo
                 // Добавить блюдо в корзину с количеством 1
                 cart.Add((dish, 1));
             }
+            MessageBox.Show($"{dish.dishName} added!");
             session.Cart = cart;
         }
         private void button1_Click(object sender, EventArgs e)
