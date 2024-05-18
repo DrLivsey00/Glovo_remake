@@ -18,6 +18,7 @@ namespace Glovo
             Database.Connect();
             Menu = Database.GetMenuList();
             InitializeMenu();
+            ProcessButton();
 
         }
         private void InitializeMenu()
@@ -73,16 +74,42 @@ namespace Glovo
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Log_In log_In = new Log_In(session);
-            log_In.Show();
+            if (!session.Logged)
+            {
+                this.Hide();
+                Log_In log_In = new Log_In(session);
+                log_In.Show();
+            }
+            else
+            {
+                session = new Session();
+                MessageBox.Show("Logged out!");
+                ProcessButton();
+            }
+
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if (session.Cart.Count == 0)
+            {
+                MessageBox.Show("Cart is empty!");
+                return;
+            }
             this.Hide();
             Cart cart = new Cart(session);
             cart.Show();
+        }
+        private void ProcessButton()
+        {
+            if (session.Logged)
+            {
+                button1.Text = "Log out";
+            }
+            else
+            {
+                button1.Text = "Log in";
+            }
         }
     }
 }

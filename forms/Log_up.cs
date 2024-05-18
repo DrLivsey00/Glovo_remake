@@ -59,6 +59,7 @@ namespace Glovo.forms
                 email_input.Clear();
                 textBox1.Clear();
                 session.userId = user.Id;
+                session.Logged = true;
 
             }
             catch (Exception ex)

@@ -47,6 +47,7 @@ namespace Glovo.forms
                 string password = textBox1.Text;
                 User user = db.GetUser(email, password);
                 session.userId = user.Id;
+                session.Logged = true;
                 this.Close();
 
             }
