@@ -1,6 +1,7 @@
 using Glovo.forms;
 using Glovo.internal_pkg.models;
 using Glovo.internal_pkg.utils;
+using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using Cart = Glovo.forms.Cart;
 
@@ -23,28 +24,39 @@ namespace Glovo
         }
         private void InitializeMenu()
         {
-            int topMargin = 50;
+            TableLayoutPanel tableLayoutPanel = new TableLayoutPanel();
+            tableLayoutPanel.Top = label1.Bottom + 10; // Розміщення під Label1 з відступом
+            tableLayoutPanel.Left = label1.Left - 150;   
+            tableLayoutPanel.AutoSize = true;
+            tableLayoutPanel.ColumnCount = 3; // Три колонки для назви, ціни та кнопки
+            this.Controls.Add(tableLayoutPanel);
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F)); // Ширина колонки для назви страви
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F)); // Ширина колонки для ціни
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
+
             for (int i = 0; i < Menu.Count; i++)
             {
+                // Створення Label для назви страви
                 Label nameLabel = new Label();
                 nameLabel.Text = Menu[i].dishName;
-                nameLabel.Top = topMargin + (i * 30);
-                nameLabel.Left = 20;
-                this.Controls.Add(nameLabel);
+                nameLabel.AutoSize = true;
 
+                // Створення Label для ціни
                 Label priceLabel = new Label();
-                priceLabel.Text = Menu[i].dishPrice.ToString(); // Вывод цены в формате денежной единицы
-                priceLabel.Top = topMargin + (i * 30);
-                priceLabel.Left = 150;
-                this.Controls.Add(priceLabel);
+                priceLabel.Text = Menu[i].dishPrice.ToString();
+                priceLabel.AutoSize = true;
 
+                // Створення кнопки "Додати"
                 int index = i;
                 Button addButton = new Button();
                 addButton.Text = "Додати";
-                addButton.Top = topMargin + (i * 30);
-                addButton.Left = 250;
+                addButton.AutoSize = true;
                 addButton.Click += (sender, e) => AddToCart(Menu[index]);
-                this.Controls.Add(addButton);
+
+                // Додавання елементів до TableLayoutPanel
+                tableLayoutPanel.Controls.Add(nameLabel, 0, i);
+                tableLayoutPanel.Controls.Add(priceLabel, 1, i);
+                tableLayoutPanel.Controls.Add(addButton, 2, i);
             }
         }
         private void AddToCart(Dish dish)
