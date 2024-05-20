@@ -19,6 +19,7 @@ namespace Glovo.forms
         public LogIn_for_admins()
         {
             InitializeComponent();
+
         }
         Database db = new Database();
 

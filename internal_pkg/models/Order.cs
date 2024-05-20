@@ -7,5 +7,9 @@
         public List<int> dishIds;
         public double Price;
 
+        public Order() {
+            dishIds = new List<int>();
+        }
+        
     }
 }

@@ -118,5 +118,72 @@ namespace Glovo.internal_pkg.utils
             return user;
 
         }
+        public List<Order> GetOrders()
+        {
+            List<Order> orders = new List<Order>();
+           
+
+            string orderQuery = "SELECT order_id, user_id, order_price FROM orders";
+            string orderDetailsQuery = "SELECT order_id, dish_id FROM order_details WHERE order_id = @orderId";
+
+            using (SQLiteCommand orderCmd = new SQLiteCommand(orderQuery, connection))
+            {
+                using (SQLiteDataReader orderReader = orderCmd.ExecuteReader())
+                {
+                    while (orderReader.Read())
+                    {
+                        Order order = new Order();
+                        order.Id = orderReader.GetInt32(0);
+                        order.userId = orderReader.GetInt32(1).ToString();
+                        order.Price = orderReader.GetDouble(2);
+
+                        using (SQLiteCommand orderDetailsCmd = new SQLiteCommand(orderDetailsQuery, connection))
+                        {
+                            orderDetailsCmd.Parameters.AddWithValue("@orderId", order.Id);
+
+                            using (SQLiteDataReader orderDetailsReader = orderDetailsCmd.ExecuteReader())
+                            {
+                                while (orderDetailsReader.Read())
+                                {
+                                    order.dishIds.Add(orderDetailsReader.GetInt32(1));
+                                }
+                            }
+                        }
+
+                        orders.Add(order);
+                    }
+                }
+            }
+
+            return orders;
+        }
+        public (int TotalUsers, int TotalOrders, double TotalOrderSum) GetStatistics()
+        {
+            string query = @"
+        SELECT 
+            (SELECT COUNT(*) FROM users) AS TotalUsers,
+            (SELECT COUNT(*) FROM orders) AS TotalOrders,
+            (SELECT SUM(order_price) FROM orders) AS TotalOrderSum";
+
+            using (SQLiteCommand cmd = new SQLiteCommand(query, connection))
+            {
+                using (SQLiteDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        int totalUsers = reader.GetInt32(0);
+                        int totalOrders = reader.GetInt32(1);
+                        double totalOrderSum = reader.IsDBNull(2) ? 0 : reader.GetDouble(2);
+
+                        return (totalUsers, totalOrders, totalOrderSum);
+                    }
+                    else
+                    {
+                        throw new Exception("Failed to retrieve statistics");
+                    }
+                }
+            }
+        }
+
     }
 }

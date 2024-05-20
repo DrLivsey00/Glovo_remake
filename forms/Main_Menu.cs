@@ -131,5 +131,11 @@ namespace Glovo
         {
             Application.Exit();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Admin a =  new Admin();
+            a.Show();
+        }
     }
 }
