@@ -24,16 +24,17 @@ namespace Glovo
         }
         private void InitializeMenu()
         {
-            TableLayoutPanel tableLayoutPanel = new TableLayoutPanel();
-            tableLayoutPanel.Top = label1.Bottom + 10; // Розміщення під Label1 з відступом
-            tableLayoutPanel.Left = label1.Left - 150;
-            tableLayoutPanel.AutoSize = true;
-            tableLayoutPanel.ColumnCount = 3; // Три колонки для назви, ціни та кнопки
-            this.Controls.Add(tableLayoutPanel);
-            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150F)); // Ширина колонки для назви страви
-            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F)); // Ширина колонки для ціни
-            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
-
+            
+            if (Menu.Count == 0)
+            {
+                Label label = new Label();
+                label.Text = "Nothing in stock :(";
+                label.AutoSize = true;
+                label.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+                tableLayoutPanel1.Controls.Add(label, 1, 1);
+                return;
+            }
+            tableLayoutPanel1.Controls.Clear();
             for (int i = 0; i < Menu.Count; i++)
             {
                 // Створення Label для назви страви
@@ -52,14 +53,15 @@ namespace Glovo
                 int index = i;
                 Button addButton = new Button();
                 addButton.Text = "Додати";
-                addButton.AutoSize = true;
+                addButton.AutoSize = false;
+                addButton.Dock = DockStyle.Fill;
                 addButton.Font = new Font("Segoe UI", 9.75F);
                 addButton.Click += (sender, e) => AddToCart(Menu[index]);
 
                 // Додавання елементів до TableLayoutPanel
-                tableLayoutPanel.Controls.Add(nameLabel, 0, i);
-                tableLayoutPanel.Controls.Add(priceLabel, 1, i);
-                tableLayoutPanel.Controls.Add(addButton, 2, i);
+                tableLayoutPanel1.Controls.Add(nameLabel, 0, i);
+                tableLayoutPanel1.Controls.Add(priceLabel, 1, i);
+                tableLayoutPanel1.Controls.Add(addButton, 2, i);
             }
         }
         private void AddToCart(Dish dish)
@@ -134,6 +136,7 @@ namespace Glovo
 
         private void button3_Click(object sender, EventArgs e)
         {
+            this.Hide();
             Admin a =  new Admin();
             a.Show();
         }

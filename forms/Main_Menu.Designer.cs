@@ -32,6 +32,7 @@
             button2 = new Button();
             label1 = new Label();
             button3 = new Button();
+            tableLayoutPanel1 = new TableLayoutPanel();
             SuspendLayout();
             // 
             // button1
@@ -76,13 +77,30 @@
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.AutoSize = true;
+            tableLayoutPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            tableLayoutPanel1.ColumnCount = 3;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 83F));
+            tableLayoutPanel1.Location = new Point(40, 61);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 2;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.Size = new Size(83, 0);
+            tableLayoutPanel1.TabIndex = 6;
+            // 
             // Main_Menu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ClientSize = new Size(609, 50);
+            ClientSize = new Size(609, 73);
+            Controls.Add(tableLayoutPanel1);
             Controls.Add(button3);
             Controls.Add(label1);
             Controls.Add(button2);
@@ -100,5 +118,6 @@
         private Button button2;
         private Label label1;
         private Button button3;
+        private TableLayoutPanel tableLayoutPanel1;
     }
 }

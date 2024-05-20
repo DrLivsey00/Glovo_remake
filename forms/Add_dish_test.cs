@@ -28,7 +28,7 @@ namespace Glovo.forms
 
         private void Add_dish_test_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Main_Menu add = new Main_Menu(new Session());
+            Menu_managment add = new Menu_managment();
             add.Show();
         }
     }

@@ -85,6 +85,7 @@
             button1.TabIndex = 4;
             button1.Text = "Manage menu";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
@@ -109,6 +110,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Admin";
             Text = "Admin";
+            FormClosed += Admin_FormClosed;
             ResumeLayout(false);
             PerformLayout();
         }

@@ -185,5 +185,23 @@ namespace Glovo.internal_pkg.utils
             }
         }
 
+        public void DeleteDish(int id)
+        {
+            string query = "DELETE FROM dishes WHERE dishId = @id";
+
+            // Создание объекта команды и указание параметров
+            using (SQLiteCommand cmd = new SQLiteCommand(query, connection))
+            {
+                cmd.Parameters.AddWithValue("@id", id);
+                // Выполнение команды SQL
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                if (rowsAffected < 0)
+                {
+                    throw new Exception("No dish with this id.");
+                }
+            }
+        }
+
     }
 }

@@ -34,12 +34,25 @@ namespace Glovo.forms
                 total_orders_users.Text = "Total users: " + totalUsers.ToString();
                 total_profit_label.Text = "Total profit: " + totalProfit.ToString();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 return;
             }
-            
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Menu_managment m = new Menu_managment();
+            this.Hide();
+            m.Show();
+        }
+
+        private void Admin_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Main_Menu m = new Main_Menu(new Session());
+            m.Show();
         }
     }
 }
