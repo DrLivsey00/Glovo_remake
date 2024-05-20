@@ -40,18 +40,20 @@
             // label1
             // 
             label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 9.75F);
             label1.Location = new Point(113, 70);
             label1.Name = "label1";
-            label1.Size = new Size(39, 15);
+            label1.Size = new Size(42, 17);
             label1.TabIndex = 0;
             label1.Text = "Email:";
             // 
             // label2
             // 
             label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 9.75F);
             label2.Location = new Point(113, 100);
             label2.Name = "label2";
-            label2.Size = new Size(60, 15);
+            label2.Size = new Size(67, 17);
             label2.TabIndex = 1;
             label2.Text = "Password:";
             // 
@@ -82,6 +84,7 @@
             // 
             // button1
             // 
+            button1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
             button1.Location = new Point(211, 171);
             button1.Name = "button1";
             button1.Size = new Size(100, 24);

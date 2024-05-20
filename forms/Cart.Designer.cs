@@ -30,13 +30,17 @@
         {
             btn_proceed = new Button();
             btn_back = new Button();
+            label1 = new Label();
             SuspendLayout();
             // 
             // btn_proceed
             // 
-            btn_proceed.Location = new Point(310, 536);
+            btn_proceed.AutoSize = true;
+            btn_proceed.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btn_proceed.Font = new Font("Segoe UI", 9.75F);
+            btn_proceed.Location = new Point(336, 45);
             btn_proceed.Name = "btn_proceed";
-            btn_proceed.Size = new Size(131, 28);
+            btn_proceed.Size = new Size(58, 27);
             btn_proceed.TabIndex = 0;
             btn_proceed.Text = "Submit";
             btn_proceed.UseVisualStyleBackColor = true;
@@ -44,29 +48,48 @@
             // 
             // btn_back
             // 
-            btn_back.Location = new Point(12, 536);
+            btn_back.AutoSize = true;
+            btn_back.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btn_back.Font = new Font("Segoe UI", 9.75F);
+            btn_back.Location = new Point(58, 45);
             btn_back.Name = "btn_back";
-            btn_back.Size = new Size(131, 28);
+            btn_back.Size = new Size(44, 27);
             btn_back.TabIndex = 1;
             btn_back.Text = "Back";
             btn_back.UseVisualStyleBackColor = true;
             btn_back.Click += btn_back_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label1.Location = new Point(218, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(33, 17);
+            label1.TabIndex = 2;
+            label1.Text = "Cart";
+            // 
             // Cart
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(461, 591);
+            AutoSize = true;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            ClientSize = new Size(461, 71);
+            Controls.Add(label1);
             Controls.Add(btn_back);
             Controls.Add(btn_proceed);
             Name = "Cart";
             Text = "Cart";
+            FormClosed += Cart_FormClosed;
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private Button btn_proceed;
         private Button btn_back;
+        private Label label1;
     }
 }

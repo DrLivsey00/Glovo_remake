@@ -27,9 +27,17 @@ namespace Glovo.forms
         }
         private void GetOrderList()
         {
-            List<(Dish,int)> cart = current.Cart;
+            List<(Dish, int)> cart = current.Cart;
             oprice = 0;
             int topMargin = 50;
+            TableLayoutPanel tableLayoutPanel = new TableLayoutPanel();
+            tableLayoutPanel.Top = label1.Bottom + 10; // Розміщення під Label1 з відступом
+            tableLayoutPanel.Left = label1.Left - 150;
+            tableLayoutPanel.AutoSize = true;
+            tableLayoutPanel.ColumnCount = 2; // Три колонки для назви, ціни та кнопки
+            this.Controls.Add(tableLayoutPanel);
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150F)); // Ширина колонки для назви страви
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F)); // Ширина колонки для ціни
             if (cart.Count > 0)
             {
                 for (int i = 0; i < cart.Count; i++)
@@ -46,9 +54,18 @@ namespace Glovo.forms
                     priceLabel.Left = 150;
                     this.Controls.Add(priceLabel);
                     oprice += cart[i].Item1.dishPrice;
+
+                    tableLayoutPanel.Controls.Add(nameLabel, 0, i);
+                    tableLayoutPanel.Controls.Add(priceLabel, 1, i);
                 }
                 Label opriceLabel = new Label();
-                opriceLabel.Text = "Вартість замовлення: "+oprice.ToString();
+                opriceLabel.AutoSize = true;
+                opriceLabel.Text = "Вартість замовлення: " + oprice.ToString("C");
+                opriceLabel.Top = tableLayoutPanel.Bottom + 10;
+                opriceLabel.Left = tableLayoutPanel.Left + 50;
+                this.Controls.Add(opriceLabel);
+                btn_back.Top = opriceLabel.Bottom+10;
+                btn_proceed.Top = opriceLabel.Bottom+10;
             }
             else
             {
@@ -70,7 +87,7 @@ namespace Glovo.forms
             try
             {
                 db.Connect();
-                db.ProceedOrder(current.Cart,current.userId,oprice);
+                db.ProceedOrder(current.Cart, current.userId, oprice);
                 current.Cart = new List<(Dish, int)>();
                 Main_Menu main_Menu = new Main_Menu(current);
                 this.Hide();
@@ -82,6 +99,12 @@ namespace Glovo.forms
                 MessageBox.Show(ex.Message);
                 return;
             }
+        }
+
+        private void Cart_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Main_Menu main_Menu = new Main_Menu(current);
+            main_Menu.Show();
         }
     }
 }

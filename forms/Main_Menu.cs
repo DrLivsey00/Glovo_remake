@@ -30,7 +30,7 @@ namespace Glovo
             tableLayoutPanel.AutoSize = true;
             tableLayoutPanel.ColumnCount = 3; // Три колонки для назви, ціни та кнопки
             this.Controls.Add(tableLayoutPanel);
-            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F)); // Ширина колонки для назви страви
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150F)); // Ширина колонки для назви страви
             tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F)); // Ширина колонки для ціни
             tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
 
@@ -43,7 +43,7 @@ namespace Glovo
 
                 // Створення Label для ціни
                 Label priceLabel = new Label();
-                priceLabel.Text = Menu[i].dishPrice.ToString();
+                priceLabel.Text = "Price: " + Menu[i].dishPrice.ToString("C");
                 priceLabel.AutoSize = true;
 
                 // Створення кнопки "Додати"

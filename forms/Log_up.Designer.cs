@@ -37,7 +37,8 @@
             // 
             // button1
             // 
-            button1.Location = new Point(228, 135);
+            button1.Font = new Font("Segoe UI", 9.75F);
+            button1.Location = new Point(186, 129);
             button1.Name = "button1";
             button1.Size = new Size(100, 24);
             button1.TabIndex = 11;
@@ -47,14 +48,14 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(206, 96);
+            textBox1.Location = new Point(164, 90);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(189, 23);
             textBox1.TabIndex = 9;
             // 
             // email_input
             // 
-            email_input.Location = new Point(206, 63);
+            email_input.Location = new Point(164, 57);
             email_input.Name = "email_input";
             email_input.Size = new Size(189, 23);
             email_input.TabIndex = 8;
@@ -62,18 +63,20 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(137, 96);
+            label2.Font = new Font("Segoe UI", 9.75F);
+            label2.Location = new Point(95, 90);
             label2.Name = "label2";
-            label2.Size = new Size(60, 15);
+            label2.Size = new Size(67, 17);
             label2.TabIndex = 7;
             label2.Text = "Password:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(137, 66);
+            label3.Font = new Font("Segoe UI", 9.75F);
+            label3.Location = new Point(95, 60);
             label3.Name = "label3";
-            label3.Size = new Size(39, 15);
+            label3.Size = new Size(42, 17);
             label3.TabIndex = 6;
             label3.Text = "Email:";
             // 
@@ -81,7 +84,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(533, 241);
+            ClientSize = new Size(453, 181);
             Controls.Add(button1);
             Controls.Add(textBox1);
             Controls.Add(email_input);
