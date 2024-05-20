@@ -9,8 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using Button = System.Windows.Forms.Button;
+using System.Xml;
 
 namespace Glovo.forms
 {
@@ -19,20 +18,23 @@ namespace Glovo.forms
         Session current;
         Database db = new Database();
         double oprice;
+
         public Cart(Session session)
         {
             InitializeComponent();
             current = session;
             GetOrderList();
         }
+
         private void GetOrderList()
         {
             List<(Dish, int)> cart = current.Cart;
             oprice = 0;
             int topMargin = 50;
+
             TableLayoutPanel tableLayoutPanel = new TableLayoutPanel();
             tableLayoutPanel.Top = label1.Bottom + 10; // Розміщення під Label1 з відступом
-            tableLayoutPanel.Left = label1.Left - 150;
+            tableLayoutPanel.Left = label1.Left - 100;
             tableLayoutPanel.AutoSize = true;
             tableLayoutPanel.ColumnCount = 2; // Три колонки для назви, ціни та кнопки
             this.Controls.Add(tableLayoutPanel);
@@ -46,14 +48,17 @@ namespace Glovo.forms
                     nameLabel.Text = cart[i].Item1.dishName;
                     nameLabel.Top = topMargin + (i * 30);
                     nameLabel.Left = 20;
+                    nameLabel.Font = new Font("Segoe UI", 9.75F);
                     this.Controls.Add(nameLabel);
 
                     Label priceLabel = new Label();
                     priceLabel.Text = cart[i].Item2.ToString(); // Вывод цены в формате денежной единицы
                     priceLabel.Top = topMargin + (i * 30);
                     priceLabel.Left = 150;
+                    priceLabel.Font = new Font("Segoe UI", 9.75F);
                     this.Controls.Add(priceLabel);
-                    oprice += cart[i].Item1.dishPrice;
+
+                    oprice += cart[i].Item1.dishPrice*cart[i].Item2;
 
                     tableLayoutPanel.Controls.Add(nameLabel, 0, i);
                     tableLayoutPanel.Controls.Add(priceLabel, 1, i);
@@ -63,23 +68,16 @@ namespace Glovo.forms
                 opriceLabel.Text = "Вартість замовлення: " + oprice.ToString("C");
                 opriceLabel.Top = tableLayoutPanel.Bottom + 10;
                 opriceLabel.Left = tableLayoutPanel.Left + 50;
+                opriceLabel.Font = new Font("Segoe UI", 9.75F);
                 this.Controls.Add(opriceLabel);
-                btn_back.Top = opriceLabel.Bottom+10;
-                btn_proceed.Top = opriceLabel.Bottom+10;
+                btn_back.Top = opriceLabel.Bottom + 10;
+                btn_proceed.Top = opriceLabel.Bottom + 10;
             }
-            else
-            {
-                Label opriceLabel = new Label();
-                opriceLabel.Text = "Cart is empty!!!";
-                opriceLabel.ForeColor = Color.Red;
-            }
-        }
+         }
 
         private void btn_back_Click(object sender, EventArgs e)
         {
-            Main_Menu main_Menu = new Main_Menu(current);
-            this.Hide();
-            main_Menu.Show();
+            this.Close();  // Скрыть текущую форму
         }
 
         private void btn_proceed_Click(object sender, EventArgs e)
@@ -89,10 +87,7 @@ namespace Glovo.forms
                 db.Connect();
                 db.ProceedOrder(current.Cart, current.userId, oprice);
                 current.Cart = new List<(Dish, int)>();
-                Main_Menu main_Menu = new Main_Menu(current);
-                this.Hide();
-                main_Menu.Show();
-
+                this.Close();
             }
             catch (Exception ex)
             {
@@ -105,6 +100,20 @@ namespace Glovo.forms
         {
             Main_Menu main_Menu = new Main_Menu(current);
             main_Menu.Show();
+        }
+
+        private void Cart_Load(object sender, EventArgs e)
+        {
+            //GetOrderList();
+        }
+        private void Cart_Shown(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

@@ -77,6 +77,7 @@
             Controls.Add(button1);
             Name = "Main_Menu";
             Text = "Main";
+            FormClosed += Main_Menu_FormClosed;
             ResumeLayout(false);
             PerformLayout();
         }

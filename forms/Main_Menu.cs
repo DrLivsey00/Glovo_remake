@@ -26,7 +26,7 @@ namespace Glovo
         {
             TableLayoutPanel tableLayoutPanel = new TableLayoutPanel();
             tableLayoutPanel.Top = label1.Bottom + 10; // Розміщення під Label1 з відступом
-            tableLayoutPanel.Left = label1.Left - 150;   
+            tableLayoutPanel.Left = label1.Left - 150;
             tableLayoutPanel.AutoSize = true;
             tableLayoutPanel.ColumnCount = 3; // Три колонки для назви, ціни та кнопки
             this.Controls.Add(tableLayoutPanel);
@@ -40,17 +40,20 @@ namespace Glovo
                 Label nameLabel = new Label();
                 nameLabel.Text = Menu[i].dishName;
                 nameLabel.AutoSize = true;
+                nameLabel.Font = new Font("Segoe UI", 9.75F);
 
                 // Створення Label для ціни
                 Label priceLabel = new Label();
                 priceLabel.Text = "Price: " + Menu[i].dishPrice.ToString("C");
                 priceLabel.AutoSize = true;
+                priceLabel.Font = new Font("Segoe UI", 9.75F);
 
                 // Створення кнопки "Додати"
                 int index = i;
                 Button addButton = new Button();
                 addButton.Text = "Додати";
                 addButton.AutoSize = true;
+                addButton.Font = new Font("Segoe UI", 9.75F);
                 addButton.Click += (sender, e) => AddToCart(Menu[index]);
 
                 // Додавання елементів до TableLayoutPanel
@@ -122,6 +125,11 @@ namespace Glovo
             {
                 button1.Text = "Log in";
             }
+        }
+
+        private void Main_Menu_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
