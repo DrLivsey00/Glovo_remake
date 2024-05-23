@@ -1,10 +1,5 @@
 ﻿using Glovo.internal_pkg.models;
-using Newtonsoft.Json;
-using System.Xml.Serialization;
-using System.Numerics;
 using System.Data.SQLite;
-using Newtonsoft.Json.Bson;
-using System.Data.SqlClient;
 
 namespace Glovo.internal_pkg.utils
 {
@@ -13,13 +8,13 @@ namespace Glovo.internal_pkg.utils
         internal SQLiteConnection connection;
 
         public Database() {
-            connection = new SQLiteConnection(@"Data Source = C:\study\Glovo\internal_pkg\db\database.db; Version = 3");
+            connection = new SQLiteConnection(@"Data Source = C:\study\KP_Mikhrin\internal_pkg\db\database.db; Version = 3");
         }
 
-        public void  Connect()
+        public void Connect()
         {
             connection.Open();
-            
+
         }
 
         public List<Dish> GetMenuList()
@@ -37,17 +32,33 @@ namespace Glovo.internal_pkg.utils
                     string dishName = reader.GetString(1); // Получение названия блюда из первого столбца
                     double dishPrice = reader.GetDouble(2); // Получение цены блюда из второго столбца
 
-                    Dish dish = new Dish(id,dishName, dishPrice);
+                    Dish dish = new Dish(id, dishName, dishPrice);
 
                     Menulist.Add(dish);
-                    
+
                 }
             }
             return Menulist;
 
         }
+        public string GetDishName(int id)
+        {
+            using (var command = new SQLiteCommand(connection))
+            {
+                command.CommandText = "SELECT dishName FROM dishes WHERE dishId = @id";
+                command.Parameters.AddWithValue("@id", id);
 
-        public void ProceedOrder(List<(Dish,int)> orderItems, int userID,double order_price)
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        return reader.GetString(0);
+                    }
+                }
+            }
+            return null;
+        }
+        public void ProceedOrder(List<(Dish, int)> orderItems, int userID, double order_price)
         {
             int orderId = 0;
             if (orderItems == null || orderItems.Count == 0)
@@ -65,9 +76,9 @@ namespace Glovo.internal_pkg.utils
             {
                 if (reader.Read())
                 {
-                  orderId = reader.GetInt32(0);
+                    orderId = reader.GetInt32(0);
                 }
-                
+
             }
 
             foreach ((Dish dish, int quantity) in orderItems)
@@ -105,7 +116,7 @@ namespace Glovo.internal_pkg.utils
                     {
                         user.permission = Permission.USER;
                     }
-                    if (password!=user.password)
+                    if (password != user.password)
                     {
                         throw new Exception("Wrong password");
                     }
@@ -121,13 +132,14 @@ namespace Glovo.internal_pkg.utils
         public List<Order> GetOrders()
         {
             List<Order> orders = new List<Order>();
-           
 
-            string orderQuery = "SELECT order_id, user_id, order_price FROM orders";
+
+            string orderQuery = "SELECT order_id, user_id, order_price, order_status FROM orders WHERE order_status = @orderst";
             string orderDetailsQuery = "SELECT order_id, dish_id FROM order_details WHERE order_id = @orderId";
 
             using (SQLiteCommand orderCmd = new SQLiteCommand(orderQuery, connection))
             {
+                orderCmd.Parameters.AddWithValue("@orderst", "IN_PROGRESS");
                 using (SQLiteDataReader orderReader = orderCmd.ExecuteReader())
                 {
                     while (orderReader.Read())
@@ -136,6 +148,7 @@ namespace Glovo.internal_pkg.utils
                         order.Id = orderReader.GetInt32(0);
                         order.userId = orderReader.GetInt32(1).ToString();
                         order.Price = orderReader.GetDouble(2);
+                        order.status = orderReader.GetString(3);
 
                         using (SQLiteCommand orderDetailsCmd = new SQLiteCommand(orderDetailsQuery, connection))
                         {
@@ -160,10 +173,10 @@ namespace Glovo.internal_pkg.utils
         public (int TotalUsers, int TotalOrders, double TotalOrderSum) GetStatistics()
         {
             string query = @"
-        SELECT 
+            SELECT 
             (SELECT COUNT(*) FROM users) AS TotalUsers,
             (SELECT COUNT(*) FROM orders) AS TotalOrders,
-            (SELECT SUM(order_price) FROM orders) AS TotalOrderSum";
+            (SELECT SUM(order_price) FROM orders WHERE order_status = 'CONFIRMED') AS TotalOrderSum";
 
             using (SQLiteCommand cmd = new SQLiteCommand(query, connection))
             {
@@ -203,5 +216,40 @@ namespace Glovo.internal_pkg.utils
             }
         }
 
+        public string GetUserById(int id)
+        {
+            using (var command = new SQLiteCommand(connection))
+            {
+                command.CommandText = "SELECT user_email FROM users WHERE user_id = @id";
+                command.Parameters.AddWithValue("@id", id);
+
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        return reader.GetString(0);
+                    }
+                }
+            }
+            return "";
+        }
+        public void DeleteOrderById(int id)
+        {
+            using (var command = new SQLiteCommand(connection))
+            {
+                command.CommandText = "DELETE FROM orders WHERE order_id = @id";
+                command.Parameters.AddWithValue("@id", id);
+                int rowsAffected = command.ExecuteNonQuery();
+            }
+        }
+        public void ConfirmOrderById(int id)
+        {
+                using (var command = new SQLiteCommand(connection))
+                {
+                    command.CommandText = "UPDATE orders SET order_status = 'CONFIRMED' WHERE order_id = @id";
+                    command.Parameters.AddWithValue("@id", id);
+                    int rowsAffected = command.ExecuteNonQuery();
+                }
+        }
     }
 }

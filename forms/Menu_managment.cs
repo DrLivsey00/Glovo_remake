@@ -1,6 +1,5 @@
 ﻿using Glovo.internal_pkg.models;
 using Glovo.internal_pkg.utils;
-using System.Windows.Forms;
 
 
 namespace Glovo.forms
@@ -43,14 +42,14 @@ namespace Glovo.forms
 
                 // Створення Label для ціни
                 Label priceLabel = new Label();
-                priceLabel.Text = "Price: " + Menu[i].dishPrice.ToString("C");
+                priceLabel.Text = "Ціна: " + Menu[i].dishPrice.ToString("C");
                 priceLabel.AutoSize = true;
                 priceLabel.Font = new Font("Segoe UI", 9.75F);
 
                 // Створення кнопки "Додати"
                 int index = i;
                 Button addButton = new Button();
-                addButton.Text = "IDI";
+                addButton.Text = "Видалити";
                 addButton.AutoSize = false;
                 addButton.Dock = DockStyle.Fill;
                 addButton.Font = new Font("Segoe UI", 9.75F);

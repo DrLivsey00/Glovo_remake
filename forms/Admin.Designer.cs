@@ -95,6 +95,7 @@
             button2.TabIndex = 5;
             button2.Text = "Manage orders";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // Admin
             // 

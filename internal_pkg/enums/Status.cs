@@ -1,7 +1,7 @@
 ﻿
 namespace Glovo.internal_pkg.models
 {
-    enum Status
+     public enum Status
     {
         CLOSED,
         IN_PROGRESS,

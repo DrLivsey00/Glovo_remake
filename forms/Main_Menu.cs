@@ -1,8 +1,6 @@
 using Glovo.forms;
 using Glovo.internal_pkg.models;
 using Glovo.internal_pkg.utils;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using Cart = Glovo.forms.Cart;
 
 namespace Glovo
@@ -45,7 +43,7 @@ namespace Glovo
 
                 // Створення Label для ціни
                 Label priceLabel = new Label();
-                priceLabel.Text = "Price: " + Menu[i].dishPrice.ToString("C");
+                priceLabel.Text = "Ціна: " + Menu[i].dishPrice.ToString("C");
                 priceLabel.AutoSize = true;
                 priceLabel.Font = new Font("Segoe UI", 9.75F);
 
@@ -69,7 +67,7 @@ namespace Glovo
             if (dish == null) return;
             if (session.userId == 0)
             {
-                MessageBox.Show("Please log in");
+                MessageBox.Show("Увійдіть будь-ласка");
                 return;
             }
             List<(Dish, int)> cart = session.Cart;
@@ -86,7 +84,7 @@ namespace Glovo
                 // Добавить блюдо в корзину с количеством 1
                 cart.Add((dish, 1));
             }
-            MessageBox.Show($"{dish.dishName} added!");
+            MessageBox.Show($"{dish.dishName} додане!");
             session.Cart = cart;
         }
         private void button1_Click(object sender, EventArgs e)
@@ -110,7 +108,7 @@ namespace Glovo
         {
             if (session.Cart.Count == 0)
             {
-                MessageBox.Show("Cart is empty!");
+                MessageBox.Show("Порожній кошик!");
                 return;
             }
             this.Hide();
@@ -131,7 +129,8 @@ namespace Glovo
 
         private void Main_Menu_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.Exit();
+            //Application.Exit();
+
         }
 
         private void button3_Click(object sender, EventArgs e)

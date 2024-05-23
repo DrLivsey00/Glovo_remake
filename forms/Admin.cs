@@ -1,14 +1,5 @@
 ﻿using Glovo.internal_pkg.models;
 using Glovo.internal_pkg.utils;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Glovo.forms
 {
@@ -53,6 +44,13 @@ namespace Glovo.forms
         {
             Main_Menu m = new Main_Menu(new Session());
             m.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Order_managment order_Managment = new Order_managment();
+            order_Managment.Show();
         }
     }
 }

@@ -31,7 +31,6 @@
             button1 = new Button();
             button2 = new Button();
             label1 = new Label();
-            button3 = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
             SuspendLayout();
             // 
@@ -53,7 +52,7 @@
             button2.Name = "button2";
             button2.Size = new Size(62, 26);
             button2.TabIndex = 1;
-            button2.Text = "Cart";
+            button2.Text = "Кошик";
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
@@ -66,16 +65,6 @@
             label1.Size = new Size(54, 21);
             label1.TabIndex = 4;
             label1.Text = "Menu";
-            // 
-            // button3
-            // 
-            button3.Location = new Point(300, 5);
-            button3.Name = "button3";
-            button3.Size = new Size(72, 32);
-            button3.TabIndex = 5;
-            button3.Text = "button3";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
             // 
             // tableLayoutPanel1
             // 
@@ -101,7 +90,6 @@
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(609, 73);
             Controls.Add(tableLayoutPanel1);
-            Controls.Add(button3);
             Controls.Add(label1);
             Controls.Add(button2);
             Controls.Add(button1);
@@ -117,7 +105,6 @@
         private Button button1;
         private Button button2;
         private Label label1;
-        private Button button3;
         private TableLayoutPanel tableLayoutPanel1;
     }
 }

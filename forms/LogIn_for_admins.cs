@@ -1,15 +1,6 @@
 ﻿using Glovo.internal_pkg.models;
 using Glovo.internal_pkg.utils;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Glovo.forms
 {
@@ -48,7 +39,7 @@ namespace Glovo.forms
                     return;
                 }
                 this.Hide();
-                Add_dish_test add = new Add_dish_test();
+                Admin add = new Admin();
                 add.Show();
 
             }

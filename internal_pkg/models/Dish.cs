@@ -1,5 +1,4 @@
 ﻿using Glovo.internal_pkg.utils;
-using Newtonsoft.Json;
 using System.Data.SQLite;
 
 namespace Glovo.internal_pkg.models
